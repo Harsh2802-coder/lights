@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Switch Bulb</title>
+    <style>
+        .center{
+           display: block;
+
+            margin-left: auto;
+            margin-right: auto;
+           
+
+        }
+        .btn{
+           margin-top: 50px;
+            padding: 1vh;
+            background-color: green;
+            position: relative;
+           
+            
+        }
+        @property --angle{
+            syntax: "<angle>";
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        .btn::after,.btn::before{
+            content: '';
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 50%;
+            z-index: -1;
+            left: 50%;
+            translate: -50% -50%;
+            
+            animation: 10s spin linear infinite;
+            background-image: conic-gradient(
+            from var(--angle),
+            transparent 70%,
+            #ff5f6d,
+            #ffc371,
+            #ffd700,
+            #32cd32,
+            #ff5f6d,
+            #00fa9a,
+            #1e90ff,
+            #9370db,
+            #ff5f6d
+            );
+
+        }
+        .btn::before{
+            filter: blur(1.5rem);
+            opacity: 0.5;
+        }
+
+        @keyframes spin{
+            from{
+                --angle:0deg;
+            }
+            to{
+                --angle:360deg;
+            }
+        }
+        
+    </style>
+</head>
+<body style="background-color: black;">
+    <img id="bulb" src="image/bulb-off.jpg" width="500vh" height="550vh" alt="image" class="center">
+    <button id="toggleBtn" class="center btn ">Turn On</button>
+
+    <script>
+       let btn =document.getElementById('toggleBtn')
+       let bulb =document.getElementById('bulb')
+       btn.addEventListener('click',toggleBulb)
+
+        function toggleBulb(e){
+            if(btn.textContent.includes('On')){
+               
+                bulb.src="image/bulb-on.webp"
+                btn.textContent="Turn Off"
+
+            }
+            else{
+                bulb.src="image/bulb-off.jpg"
+                btn.textContent="Turn On"
+
+            }
+            
+
+
+        }
+    </script>
+    
+</body>
+</html>
